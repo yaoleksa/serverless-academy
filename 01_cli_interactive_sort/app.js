@@ -24,6 +24,20 @@ const askInput = () => {
       To exit the program, the user need to enter exit, otherwise the program will repeat itself again and again, asking for new data and suggesting sorting`, sortType => {
         const trimmed = sortType.trim();
         switch(trimmed) {
+          case '1':
+            readline.close();
+            console.log(arr.sort());
+            return;
+          case '2':
+            return checkType(arr);
+          case '3':
+            return checkType(arr);
+          case '4':
+            return checkType(arr);
+          case '5':
+            return checkType(arr);
+          case '6':
+            return checkType(arr);
           case 'exit':
             readline.close();
             return;
