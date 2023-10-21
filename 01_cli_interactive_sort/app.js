@@ -27,12 +27,7 @@ const askInput = () => {
   let arr = [];
   readline.question('Hello! Enter 10 words or digits deviding them in spaces: ', input => {
     const convertedToArray = input.trim().split(' ');
-    if(convertedToArray.length != 10) {
-      console.log('You must enter exactly ten words or numbers');
-      askInput();
-    } else {
-      arr.push(...convertedToArray);
-    }
+    arr.push(...convertedToArray);
     readline.question(`How would you like to sort values:
       1. Sort words alphabetically
       2. Show numbers from lesser to greater
