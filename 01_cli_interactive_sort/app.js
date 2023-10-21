@@ -16,7 +16,7 @@ const allWords = (list) => {
 const allNumbers = (list) => {
   let result = true;
   list.forEach(e => {
-    if(Number.isNaN(e)) {
+    if(Number.isNaN(Number(e))) {
       result = false;
     }
   });
@@ -26,7 +26,7 @@ const allNumbers = (list) => {
 const askInput = () => {
   let arr = [];
   readline.question('Hello! Enter 10 words or digits deviding them in spaces: ', input => {
-    const convertedToArray = input.split(' ');
+    const convertedToArray = input.trim().split(' ');
     if(convertedToArray.length != 10) {
       console.log('You must enter exactly ten words or numbers');
       askInput();
@@ -52,7 +52,7 @@ const askInput = () => {
             }
             break;
           case '2':
-            if(allNumbers) {
+            if(allNumbers(arr)) {
               arr.sort((a, b) => {
                 if(a < b) {
                   return -1;
@@ -68,7 +68,7 @@ const askInput = () => {
             }
             break;
           case '3':
-            if(allNumbers) {
+            if(allNumbers(arr)) {
               arr.sort((a, b) => {
                 if(a < b) {
                   return 1;
