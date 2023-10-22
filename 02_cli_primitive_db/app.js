@@ -22,10 +22,16 @@ const userName = new Question({
 const userGender = new Question({
     name: "GenderOfTheUser",
     type: "list",
-    choices: ['Male', 'Female'],
     message: "Choose your gender. To cancel press ENTER: ",
+    choices: ['Male', 'Female'],
 });
 
-inquirer.prompt([userName, userGender]).then(answer => {
+const userAge = new Question({
+    name: "AgeOfTheUser",
+    type: "number",
+    message: "Enter your age. To cancel press ENTER: "
+});
+
+inquirer.prompt([userName, userGender, userAge]).then(answer => {
     console.log(answer);
 })
