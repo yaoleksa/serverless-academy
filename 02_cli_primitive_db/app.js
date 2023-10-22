@@ -7,10 +7,10 @@ class Question {
     message;
     choices;
     validate = (inp) => {
-        if(inp) {
-            return true;
+        if(typeof inp == 'string' && inp.length == 0) {
+            process.exit();
         }
-        process.exit();
+        return true;
     }
     constructor(params) {
         this.name = params.name;
@@ -29,19 +29,24 @@ const userName = new Question({
 const userGender = new Question({
     name: "GenderOfTheUser",
     type: "list",
-    message: "Choose your gender. To cancel press ENTER: ",
+    message: "Choose your gender: ",
     choices: ['Male', 'Female'],
 });
 
 const userAge = new Question({
     name: "AgeOfTheUser",
     type: "number",
-    message: "Enter your age. To cancel press ENTER: "
+    message: "Enter your age: "
 });
 
 const askInput = () => {
     inquirer.prompt([userName, userGender, userAge]).then(answer => {
-        console.log(answer);
+        fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
+            if(err) {
+                console.error(err.message);
+            }
+        });
+        console.log('User was successfully created into database');
         askInput();
     });
 }
