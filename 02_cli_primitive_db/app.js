@@ -1,3 +1,4 @@
+import fs from "fs";
 import inquirer from "inquirer";
 
 class Question {
@@ -5,6 +6,12 @@ class Question {
     type;
     message;
     choices;
+    validate = (inp) => {
+        if(inp) {
+            return true;
+        }
+        process.exit();
+    }
     constructor(params) {
         this.name = params.name;
         this.type = params.type;
@@ -32,6 +39,11 @@ const userAge = new Question({
     message: "Enter your age. To cancel press ENTER: "
 });
 
-inquirer.prompt([userName, userGender, userAge]).then(answer => {
-    console.log(answer);
-})
+const askInput = () => {
+    inquirer.prompt([userName, userGender, userAge]).then(answer => {
+        console.log(answer);
+        askInput();
+    });
+}
+
+askInput();
