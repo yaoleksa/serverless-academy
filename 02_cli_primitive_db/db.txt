@@ -1,3 +1,1 @@
 {"NameOfTheUser":"Oleksa","GenderOfTheUser":"Male","AgeOfTheUser":26}
-{"NameOfTheUser":"Anna","GenderOfTheUser":"Female","AgeOfTheUser":26}
-{"NameOfTheUser":"Pavlo","GenderOfTheUser":"Male","AgeOfTheUser":29}

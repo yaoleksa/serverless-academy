@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs, { mkdirSync } from "fs";
 import inquirer from "inquirer";
 
 class Question {
@@ -51,7 +51,7 @@ const userAge = new Question({
 const search = new Question({
     name: "searchInDB",
     type: "confirm",
-    message: "Would you to search values in DB?",
+    message: "Would you to search values in DB? ",
     when: (response) => {
         if(response && response.NameOfTheUser == '') {
             return true;
@@ -60,8 +60,42 @@ const search = new Question({
     }
 });
 
+const dbMap = new Map();
+let msgPrefix = "";
+
+fs.readFile('./db.txt', 'utf-8', (err, data) => {
+    if(err) {
+        console.error(err.message);
+        return;
+    } else if (data) {
+        data.split('\n').forEach(e => {
+            let element;
+            try {
+                element = JSON.parse(e);
+                msgPrefix += JSON.stringify(element);
+                dbMap.set(element.NameOfTheUser, element);
+            } catch(err) {
+                // error was successfuly caught;
+            }
+        });
+    }
+});
+
+const findByName = new Question({
+    name: "findByName",
+    type: "input",
+    message: "Enter user name you wanna find in DB: ",
+    when: (response) => {
+        if(response && response.searchInDB) {
+            return true;
+        }
+        return false;
+    }
+});
+
 const askInput = () => {
-    inquirer.prompt([userName, userGender, userAge, search]).then(answer => {
+    inquirer.prompt([userName, userGender, userAge, search, findByName]).then(answer => {
+        const objMap = new Map();
         if(answer && answer.NameOfTheUser && answer.NameOfTheUser.length > 0) {
             fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
                 if(err) {
@@ -69,15 +103,14 @@ const askInput = () => {
                 }
             });
             console.log('User was successfully created into database');
-        } else if(answer && answer.searchInDB) {
-            fs.readFile('./db.txt', 'utf-8', (err, data) => {
-                if(err) {
-                    console.error(err.message);
-                    return;
-                } else if(data) {
-                    console.log('\n' + data);
-                }
-            });
+        }
+        if(answer && answer.findByName && answer.findByName.length > 0) {
+            const query = dbMap.get(answer.findByName);
+            if(query) {
+                console.log(`User was succesfuly found.\n ${JSON.stringify(query)}`);
+            } else {
+                console.log('Such user does not exist. Try Again');
+            }
         }
         askInput();
     });
