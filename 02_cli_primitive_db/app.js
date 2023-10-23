@@ -67,7 +67,7 @@ const search = new Question({
 const dbMap = new Map();
 let msgPrefix = "";
 
-fs.readFileSync('./db.txt', 'utf-8', (err, data) => {
+fs.readFile('./db.txt', 'utf-8', (err, data) => {
     if(err) {
         console.error(err.message);
         return;

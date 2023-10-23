@@ -1,0 +1,3 @@
+{"NameOfTheUser":"Oleksa","GenderOfTheUser":"Male","AgeOfTheUser":26}
+{"NameOfTheUser":"Anna","GenderOfTheUser":"Female","AgeOfTheUser":26}
+{"NameOfTheUser":"Stasia","GenderOfTheUser":"Female","AgeOfTheUser":26}
