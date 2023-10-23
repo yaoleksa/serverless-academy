@@ -1,6 +1,7 @@
 import fs from "fs";
 import inquirer from "inquirer";
 
+const usersInCurrentSession = [];
 let createMode = true;
 let searchMode = false;
 
@@ -66,7 +67,7 @@ const search = new Question({
 const dbMap = new Map();
 let msgPrefix = "";
 
-fs.readFile('./db.txt', 'utf-8', (err, data) => {
+fs.readFileSync('./db.txt', 'utf-8', (err, data) => {
     if(err) {
         console.error(err.message);
         return;
@@ -76,7 +77,7 @@ fs.readFile('./db.txt', 'utf-8', (err, data) => {
             try {
                 element = JSON.parse(e);
                 msgPrefix += JSON.stringify(element);
-                dbMap.set(element.NameOfTheUser, element);
+                dbMap.set(element.NameOfTheUser.toLowerCase(), element);
             } catch(err) {
                 // error was successfuly caught;
             }
@@ -95,12 +96,14 @@ const askInput = () => {
     inquirer.prompt([userName, userGender, userAge, search]).then(answer => {
         const objMap = new Map();
         if(answer && answer.NameOfTheUser && answer.NameOfTheUser.length > 0) {
-            if(!dbMap.has(answer.NameOfTheUser)) {
+            const Id = answer.NameOfTheUser.toLowerCase();
+            if(!dbMap.has(Id) && !usersInCurrentSession.includes(Id)) {
                 fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
                     if(err) {
                         console.error(err.message);
                     }
                 });
+                usersInCurrentSession.push(Id);
                 console.log('User was successfully created into database');
             } else {
                 console.log('User with this name already exist! Duplicates don\'t allowed!');
@@ -113,12 +116,15 @@ const askInput = () => {
                 console.log(e);
             })
         }
+        if(answer && answer.searchInDB === false) {
+            process.exit();
+        }
         if(createMode) {
             askInput();
         } else if(searchMode) {
             inquirer.prompt([findByName]).then(userResponse => {
                 if(userResponse && userResponse.findByName && userResponse.findByName.length > 0) {
-                    const query = dbMap.get(userResponse.findByName);
+                    const query = dbMap.get(userResponse.findByName.toLowerCase());
                     if(query) {
                         console.log(`User was succesfuly found.\n ${JSON.stringify(query)}`);
                     } else {
