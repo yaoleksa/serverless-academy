@@ -6,17 +6,13 @@ class Question {
     type;
     message;
     choices;
-    validate = (inp) => {
-        if(typeof inp == 'string' && inp.length == 0) {
-            process.exit();
-        }
-        return true;
-    }
+    when;
     constructor(params) {
         this.name = params.name;
         this.type = params.type;
         this.message = params.message;
         this.choices = params.choices;
+        this.when = params.when;
     }
 }
 
@@ -24,6 +20,7 @@ const userName = new Question({
     name: "NameOfTheUser", 
     type: "input",
     message: "Enter user\'s name. To cancel press ENTER: ",
+    when: true
 });
 
 const userGender = new Question({
@@ -31,12 +28,24 @@ const userGender = new Question({
     type: "list",
     message: "Choose your gender: ",
     choices: ['Male', 'Female'],
+    when: (response) => {
+        if(response && response.NameOfTheUser && response.NameOfTheUser.length > 0) {
+            return true;
+        }
+        return false;
+    }
 });
 
 const userAge = new Question({
     name: "AgeOfTheUser",
     type: "number",
-    message: "Enter your age: "
+    message: "Enter your age: ",
+    when: (response) => {
+        if(response && response.NameOfTheUser && response.NameOfTheUser.length > 0) {
+            return true;
+        }
+        return false;
+    }
 });
 
 const askInput = () => {
