@@ -1,5 +1,8 @@
-import fs, { mkdirSync } from "fs";
+import fs from "fs";
 import inquirer from "inquirer";
+
+let createMode = true;
+let searchMode = false;
 
 class Question {
     name;
@@ -94,7 +97,7 @@ const findByName = new Question({
 });
 
 const askInput = () => {
-    inquirer.prompt([userName, userGender, userAge, search, findByName]).then(answer => {
+    inquirer.prompt([userName, userGender, userAge, search]).then(answer => {
         const objMap = new Map();
         if(answer && answer.NameOfTheUser && answer.NameOfTheUser.length > 0) {
             fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
@@ -104,7 +107,14 @@ const askInput = () => {
             });
             console.log('User was successfully created into database');
         }
-        if(answer && answer.findByName && answer.findByName.length > 0) {
+        if(answer && answer.searchInDB) {
+            searchMode = true;
+            createMode = false;
+            dbMap.forEach(e => {
+                console.log(e);
+            })
+        }
+        if(false && answer && answer.findByName && answer.findByName.length > 0) {
             const query = dbMap.get(answer.findByName);
             if(query) {
                 console.log(`User was succesfuly found.\n ${JSON.stringify(query)}`);
@@ -112,7 +122,11 @@ const askInput = () => {
                 console.log('Such user does not exist. Try Again');
             }
         }
-        askInput();
+        if(createMode) {
+            askInput();
+        } else if(searchMode) {
+            console.log('Here we are');
+        }
     });
 }
 
