@@ -88,12 +88,7 @@ const findByName = new Question({
     name: "findByName",
     type: "input",
     message: "Enter user name you wanna find in DB: ",
-    when: (response) => {
-        if(response && response.searchInDB) {
-            return true;
-        }
-        return false;
-    }
+    when: true
 });
 
 const askInput = () => {
@@ -125,7 +120,16 @@ const askInput = () => {
         if(createMode) {
             askInput();
         } else if(searchMode) {
-            console.log('Here we are');
+            inquirer.prompt([findByName]).then(userResponse => {
+                if(userResponse && userResponse.findByName && userResponse.findByName.length > 0) {
+                    const query = dbMap.get(userResponse.findByName);
+                    if(query) {
+                        console.log(`User was succesfuly found.\n ${JSON.stringify(query)}`);
+                    } else {
+                        console.log('Such user does not exist. Try Again');
+                    }
+                }
+            })
         }
     });
 }
