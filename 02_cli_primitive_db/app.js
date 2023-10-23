@@ -48,14 +48,29 @@ const userAge = new Question({
     }
 });
 
+const search = new Question({
+    name: "searchInDB",
+    type: "checkbox",
+    message: "Would you to search values in DB?",
+    choices: ["Y", "N"],
+    when: (response) => {
+        if(response && response.NameOfTheUser == '') {
+            return true;
+        }
+        return false;
+    }
+});
+
 const askInput = () => {
-    inquirer.prompt([userName, userGender, userAge]).then(answer => {
-        fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
-            if(err) {
-                console.error(err.message);
-            }
-        });
-        console.log('User was successfully created into database');
+    inquirer.prompt([userName, userGender, userAge, search]).then(answer => {
+        if(answer && answer.NameOfTheUser && answer.NameOfTheUser.length > 0) {
+            fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
+                if(err) {
+                    console.error(err.message);
+                }
+            });
+            console.log('User was successfully created into database');
+        }
         askInput();
     });
 }
