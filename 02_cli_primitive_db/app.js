@@ -95,12 +95,16 @@ const askInput = () => {
     inquirer.prompt([userName, userGender, userAge, search]).then(answer => {
         const objMap = new Map();
         if(answer && answer.NameOfTheUser && answer.NameOfTheUser.length > 0) {
-            fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
-                if(err) {
-                    console.error(err.message);
-                }
-            });
-            console.log('User was successfully created into database');
+            if(!dbMap.has(answer.NameOfTheUser)) {
+                fs.appendFile('./db.txt', JSON.stringify(answer) + '\n', err => {
+                    if(err) {
+                        console.error(err.message);
+                    }
+                });
+                console.log('User was successfully created into database');
+            } else {
+                console.log('User with this name already exist! Duplicates don\'t allowed!');
+            }
         }
         if(answer && answer.searchInDB) {
             searchMode = true;
@@ -108,14 +112,6 @@ const askInput = () => {
             dbMap.forEach(e => {
                 console.log(e);
             })
-        }
-        if(false && answer && answer.findByName && answer.findByName.length > 0) {
-            const query = dbMap.get(answer.findByName);
-            if(query) {
-                console.log(`User was succesfuly found.\n ${JSON.stringify(query)}`);
-            } else {
-                console.log('Such user does not exist. Try Again');
-            }
         }
         if(createMode) {
             askInput();
