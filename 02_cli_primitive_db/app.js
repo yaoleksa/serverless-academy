@@ -69,6 +69,15 @@ const askInput = () => {
                 }
             });
             console.log('User was successfully created into database');
+        } else if(answer && answer.searchInDB) {
+            fs.readFile('./db.txt', 'utf-8', (err, data) => {
+                if(err) {
+                    console.error(err.message);
+                    return;
+                } else if(data) {
+                    console.log('\n' + data);
+                }
+            });
         }
         askInput();
     });
