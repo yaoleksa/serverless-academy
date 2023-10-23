@@ -50,9 +50,8 @@ const userAge = new Question({
 
 const search = new Question({
     name: "searchInDB",
-    type: "checkbox",
+    type: "confirm",
     message: "Would you to search values in DB?",
-    choices: ["Y", "N"],
     when: (response) => {
         if(response && response.NameOfTheUser == '') {
             return true;
