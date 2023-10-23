@@ -104,6 +104,7 @@ const askInput = () => {
                     }
                 });
                 usersInCurrentSession.set(Id, answer);
+                dbMap.set(Id, answer);
                 console.log('User was successfully created into database');
             } else {
                 console.log('User with this name already exist! Duplicates don\'t allowed!');
