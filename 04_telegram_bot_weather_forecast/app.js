@@ -45,5 +45,5 @@ function weatherForecastRequest(chatId) {
         }
     }).then(res => {
         bot.sendMessage(chatId, JSON.stringify(res.data.list[0]));
-    })
+    });
 }
