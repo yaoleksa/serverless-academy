@@ -1,0 +1,1 @@
+To run application type in terminal next command `env $(cat *.env | xargs) node app.js`
