@@ -44,9 +44,6 @@ function weatherForecastRequest(chatId) {
             APPID: process.env.APPID
         }
     }).then(res => {
-        const body = res.data;
-        console.log(body);
-        const forecast = body.list[0];
-        bot.sendMessage(chatId, JSON.stringify(forecast));
+        bot.sendMessage(chatId, JSON.stringify(res.data.list[0]));
     })
 }
