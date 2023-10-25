@@ -37,10 +37,10 @@ bot.onText(/at intervals of 6 hours/, msg => {
 })
 
 function weatherForecastRequest(chatId) {
-    axios.get('https://pro.openweathermap.org/data/2.5/forecast/hourly', {
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast`, {
         params: {
-            q: `Lviv,UA`,
-            appid: process.env.APPID
+            q: 'Lviv,ua',
+            APPID: process.env.APPID
         }
     }).then(res => {
         console.log(res.data);
