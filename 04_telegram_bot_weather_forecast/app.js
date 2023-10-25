@@ -33,7 +33,8 @@ bot.onText(/at intervals of 3 hours/, msg => {
 });
 
 bot.onText(/at intervals of 6 hours/, msg => {
-    weatherForecastRequest();
+    weatherForecastRequest(msg.chat.id);
+    setInterval(weatherForecastRequest, 1000 * 60 * 360, msg.chat.id);
 })
 
 function weatherForecastRequest(chatId) {
@@ -43,7 +44,9 @@ function weatherForecastRequest(chatId) {
             APPID: process.env.APPID
         }
     }).then(res => {
-        console.log(res.data);
-        bot.sendMessage(chatId, res.data);
+        const body = res.data;
+        console.log(body);
+        const forecast = body.list[0];
+        bot.sendMessage(chatId, JSON.stringify(forecast));
     })
 }
