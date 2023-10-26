@@ -1,1 +1,1 @@
-To run bot type `env $(cat *.env | xargs) node app.js` command into termoinal
+To run bot type `env $(cat *.env | xargs) node app.js` command into termoinal (Linux only)

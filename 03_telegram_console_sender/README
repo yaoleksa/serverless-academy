@@ -1,2 +1,2 @@
-To run the program type env $(cat *.env | xargs) node app.js <command> <argument> into terminal
+To run the program type env $(cat *.env | xargs) node app.js <command> <argument> into terminal (Linux only)
 To get more details about <command> type node ./app.js --help or -h into terminal
