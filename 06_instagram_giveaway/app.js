@@ -5,17 +5,19 @@ fs.readdir('./2kk_words_400x400', (err, content) => {
     }
     if(content) {
         if(content.length) {
+            let all = [];
             content.forEach(e => {
-                fs.readFile('./2kk_words_400x400/' + e, (err, data) => {
-                    if(err) {
-                        console.error(err.message);
-                    }
-                    if(data) {
-                        console.log(data.toString());
-                        return;
-                    }
-                });
+                all.push(...fs.readFileSync('./2kk_words_400x400/' + e).toString().split('\n'));
             });
+            console.log(uniqueValues(all));
         }
     }
-})
+});
+
+function uniqueValues(arr) {
+    const unique = new Set();
+    arr.forEach(e => {
+        unique.add(e);
+    });
+    return unique.size;
+}
