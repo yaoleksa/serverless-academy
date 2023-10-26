@@ -7,10 +7,13 @@ fs.readdir('./2kk_words_400x400', (err, content) => {
     if(content) {
         if(content.length) {
             const map = new Map();
+            const files = [];
             content.forEach(e => {
                 map.set(e, fs.readFileSync('./2kk_words_400x400/' + e).toString().split('\n'));
+                files.push(e);
             });
             console.log(`Unique names: ${uniqueValues(map)}`);
+            console.log(`Exist in all files: ${existInAllFiles()}`);
             console.log(`Elapsed time: ${Date.now() - start} ms`);
         }
     }
@@ -28,4 +31,9 @@ function uniqueValues(mapArr) {
         }
     });
     return unique.size;
+}
+
+function existInAllFiles() {
+    // TODO
+    return 0;
 }
