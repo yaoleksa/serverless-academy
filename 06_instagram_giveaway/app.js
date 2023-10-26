@@ -1,3 +1,4 @@
+const start = Date.now();
 const fs = require('fs');
 fs.readdir('./2kk_words_400x400', (err, content) => {
     if(err) {
@@ -5,19 +6,26 @@ fs.readdir('./2kk_words_400x400', (err, content) => {
     }
     if(content) {
         if(content.length) {
-            let all = [];
+            const map = new Map();
             content.forEach(e => {
-                all.push(...fs.readFileSync('./2kk_words_400x400/' + e).toString().split('\n'));
+                map.set(e, fs.readFileSync('./2kk_words_400x400/' + e).toString().split('\n'));
             });
-            console.log(uniqueValues(all));
+            console.log(`Unique names: ${uniqueValues(map)}`);
+            console.log(`Elapsed time: ${Date.now() - start} ms`);
         }
     }
 });
 
-function uniqueValues(arr) {
+function uniqueValues(mapArr) {
     const unique = new Set();
-    arr.forEach(e => {
-        unique.add(e);
+    mapArr.forEach(array => {
+        if(array.length) {
+            array.forEach(e => {
+                unique.add(e);
+            });
+        } else {
+            unique.add(e);
+        }
     });
     return unique.size;
 }
