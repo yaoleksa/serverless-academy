@@ -13,7 +13,7 @@ fs.readdir('./2kk_words_400x400', (err, content) => {
                 files.push(e);
             });
             console.log(`Unique names: ${uniqueValues(map)}`);
-            console.log(`Exist in all files: ${existInAllFiles()}`);
+            console.log(`Exist in all files: ${existInAllFiles(map)}`);
             console.log(`Elapsed time: ${Date.now() - start} ms`);
         }
     }
@@ -33,7 +33,25 @@ function uniqueValues(mapArr) {
     return unique.size;
 }
 
-function existInAllFiles() {
-    // TODO
-    return 0;
+function existInAllFiles(mapArr) {
+    const iterator = mapArr.keys();
+    let key = iterator.next().value;
+    console.log(`first one: ${key}`);
+    const first = mapArr.get(key);
+    const result = new Set();
+    first.forEach(e => {
+        const keys = mapArr.keys();
+        let key1 = iterator.next().value;
+        let count = 1;
+        while(key1) {
+            key1 = keys.next().value;
+            if(key1 && mapArr.get(key1).includes(e)) {
+                count++;
+            }
+        }
+        if(count == mapArr.size - 1) {
+            result.add(e);
+        }
+    });
+    return result.size;
 }
