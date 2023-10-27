@@ -19,9 +19,24 @@ fs.readFile('./data.json', (err, data) => {
                 unique.get(vacation.user._id).vacations.push(vacation);
             }
         });
-        console.log(unique.size);
+        const keys = unique.keys();
+        let key = keys.next().value;
+        const toWrite = [];
+        while(key) {
+            toWrite.push(unique.get(key));
+            key = keys.next().value;
+        }
+        toWrite.forEach(e => {
+            fs.writeFile('./result.json', JSON.stringify(e), (err) => {
+                if(err) {
+                    console.error(err.message);
+                }
+            })
+        })
     }
 });
+
+fs.writeFileSync('./result.json', "{\"name\": \"Oleksa\"}", (err) => {});
 
 class User {
     userId;
