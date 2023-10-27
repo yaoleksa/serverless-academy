@@ -14,6 +14,7 @@ fs.readdir('./2kk_words_400x400', (err, content) => {
             });
             console.log(`Unique names: ${uniqueValues(map)}`);
             console.log(`Exist in all files: ${existInAllFiles(map)}`);
+            console.log(`Exist at least in 10 files: ${existInAtleastTen(map)}`);
             console.log(`Elapsed time: ${Date.now() - start} ms`);
         }
     }
@@ -27,7 +28,7 @@ function uniqueValues(mapArr) {
                 unique.add(e);
             });
         } else {
-            unique.add(e);
+            unique.add(array);
         }
     });
     return unique.size;
@@ -36,7 +37,6 @@ function uniqueValues(mapArr) {
 function existInAllFiles(mapArr) {
     const iterator = mapArr.keys();
     let key = iterator.next().value;
-    console.log(`first one: ${key}`);
     const first = mapArr.get(key);
     const result = new Set();
     first.forEach(e => {
@@ -54,4 +54,32 @@ function existInAllFiles(mapArr) {
         }
     });
     return result.size;
+}
+
+function existInAtleastTen(mapArr) {
+    const unique = new Set();
+    mapArr.forEach(array => {
+        if(array.length) {
+            array.forEach(e => {
+                unique.add(e);
+            })
+        } else {
+            unique.add(array);
+        }
+    });
+    const keys = [];
+    const iterator = mapArr.keys();
+    let key = iterator.next().value;
+    const newMap = new Map();
+    while(key) {
+        keys.push(key);
+        newMap.set(key, new Set(mapArr.get(key)));
+        key = iterator.next().value;
+    }
+    // TODO
+    keys.forEach(e => {
+        console.log(newMap.get(e).size);
+    });
+    // TODO
+    return unique.size;
 }
