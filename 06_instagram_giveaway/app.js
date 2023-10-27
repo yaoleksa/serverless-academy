@@ -76,10 +76,19 @@ function existInAtleastTen(mapArr) {
         newMap.set(key, new Set(mapArr.get(key)));
         key = iterator.next().value;
     }
-    // TODO
-    keys.forEach(e => {
-        console.log(newMap.get(e).size);
-    });
-    // TODO
-    return unique.size;
+    // Final solution: start
+    const result = new Set();
+    for(let unit of unique) {
+        let count = 0;
+        keys.forEach(key => {
+            if(newMap.get(key).has(unit)) {
+                count++;
+            }
+        });
+        if(count >= 10) {
+            result.add(unit);
+        }
+    }
+    // Final solution: end
+    return result.size;
 }
