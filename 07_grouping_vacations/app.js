@@ -5,7 +5,7 @@ fs.readFile('./data.json', (err, data) => {
     }
     if(data) {
         const convertedData = data.toString('utf-8');
-        const beforeParsing = convertedData.slice(1, convertedData.length - 1).replace(/\},\r\n\s+\{/g, '}*\n{').split("*\n");
+        const beforeParsing = convertedData.slice(convertedData.indexOf('[') + 1, convertedData.lastIndexOf(']')).replace(/\},\r\n\s+\{/g, '}*\n{').split("*\n");
         const convertedToArray = [];
         beforeParsing.forEach(e => {
             convertedToArray.push(JSON.parse(e));
