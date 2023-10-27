@@ -39,17 +39,22 @@ function existInAllFiles(mapArr) {
     let key = iterator.next().value;
     const first = mapArr.get(key);
     const result = new Set();
+    const newMap = new Map();
+    while(key) {
+        newMap.set(key, new Set(mapArr.get(key)));
+        key = iterator.next().value;
+    }
     first.forEach(e => {
-        const keys = mapArr.keys();
-        let key1 = iterator.next().value;
+        const keys = newMap.keys();
+        let key1 = keys.next().value;
         let count = 1;
         while(key1) {
             key1 = keys.next().value;
-            if(key1 && mapArr.get(key1).includes(e)) {
+            if(key1 && newMap.get(key1).has(e)) {
                 count++;
             }
         }
-        if(count == mapArr.size - 1) {
+        if(count >= newMap.size - 1) {
             result.add(e);
         }
     });
