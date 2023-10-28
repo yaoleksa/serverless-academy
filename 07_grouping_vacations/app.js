@@ -26,17 +26,13 @@ fs.readFile('./data.json', (err, data) => {
             toWrite.push(unique.get(key));
             key = keys.next().value;
         }
-        toWrite.forEach(e => {
-            fs.writeFile('./result.json', JSON.stringify(e), (err) => {
-                if(err) {
-                    console.error(err.message);
-                }
-            })
-        })
+        fs.writeFile('./result.json', JSON.stringify(toWrite, null, 2), err => {
+            if(err) {
+                console.error(err.message);
+            }
+        });
     }
 });
-
-fs.writeFileSync('./result.json', "{\"name\": \"Oleksa\"}", (err) => {});
 
 class User {
     userId;
