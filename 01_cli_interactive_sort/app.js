@@ -40,7 +40,9 @@ const askInput = () => {
         switch(trimmed) {
           case '1':
             if(allWords(arr)) {
-              console.log(arr.sort());
+              console.log(arr.sort((first, second) => {
+                return first.toLowerCase().localeCompare(second.toLowerCase());
+              }));
             } else {
               console.log('For this type of sorting your must contain only words');
               askInput();
