@@ -5,12 +5,30 @@ for(let i = 1; i < 21; i++) {
     endpoints.push(`http://localhost:${port}/json${i}`);
 }
 
-http.get(endpoints[11], res => {
-    const data = [];
-    res.on('data', chunk => {
-        data.push(chunk);
-    });
-    res.on('end', () => {
-        console.log(JSON.stringify(JSON.parse(Buffer.concat(data).toString()), null, 2));
-    })
+endpoints.forEach(endpoint => {
+    makeCall(endpoint, 0);
 });
+
+async function makeCall(url, tryNumber) {
+    if(tryNumber >= 3) {
+        return;
+    }
+    try {
+        http.get(url, res => {
+            const data = [];
+            if(res.statusCode == 200) {
+                res.on('data', chunk => {
+                    data.push(chunk);
+                });
+                res.on('end', () => {
+                    if(JSON.parse(Buffer.concat(data).toString()).isDone) {
+                        console.log('done');
+                    }
+                });
+            }
+        });
+    } catch(exception) {
+        tryNumber++;
+        makeCall(url, tryNumber);
+    }
+}
