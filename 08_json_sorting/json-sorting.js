@@ -1,3 +1,4 @@
+const { request } = require('http');
 const https = require('https');
 const endpoints = `https://jsonbase.com/sls-team/json-793
 https://jsonbase.com/sls-team/json-955
@@ -18,18 +19,6 @@ https://jsonbase.com/sls-team/json-79
 https://jsonbase.com/sls-team/json-706
 https://jsonbase.com/sls-team/json-521
 https://jsonbase.com/sls-team/json-350
-https://jsonbase.com/sls-team/json-64`.split('\n').forEach(endpoint => {
-    try {
-        https.get(endpoint, res => {
-            const data = [];
-            res.on('data', chunk => {
-                data.push(chunk);
-            });
-            res.on('end', () => {
-                console.log(JSON.parse(Buffer.concat(data).toString()));
-            }).on('error', err => {
-                console.log('oh :(');
-            });
-        });
-    } catch(exception) {}
-});
+https://jsonbase.com/sls-team/json-64`.split('\n');
+
+console.log(endpoints.length);
