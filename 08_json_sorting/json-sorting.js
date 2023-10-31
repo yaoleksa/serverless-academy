@@ -4,7 +4,7 @@ const endpoints = [];
 for(let i = 1; i < 21; i++) {
     endpoints.push(`http://localhost:${port}/json${i}`);
 }
-
+let success = 0;
 endpoints.forEach(endpoint => {
     makeCall(endpoint, 0);
 });
@@ -22,7 +22,10 @@ async function makeCall(url, tryNumber) {
                 });
                 res.on('end', () => {
                     if(JSON.parse(Buffer.concat(data).toString()).isDone) {
-                        console.log('done');
+                        success++;
+                    }
+                    if(url.includes('20')) {
+                        console.log(`Found True values: ${success}\nFound False values: ${20 - success}`);
                     }
                 });
             }
