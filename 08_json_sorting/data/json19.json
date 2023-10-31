@@ -1,0 +1,13 @@
+{
+ "ip": "88.71.237.171",
+ "hostname": "dslb-088-071-237-171.088.071.pools.vodafone-ip.de",
+ "city": "Hamburg",
+ "region": "Hamburg",
+ "country": "DE",
+ "loc": "53.5507,9.9930",
+ "org": "AS3209 Vodafone GmbH",
+ "postal": "20038",
+ "timezone": "Europe/Berlin",
+ "readme": "https://ipinfo.io/missingauth",
+ "isDone": true
+}

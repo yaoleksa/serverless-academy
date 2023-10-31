@@ -1,0 +1,67 @@
+{
+    "results": [
+        {
+            "gender":"female",
+            "name": {
+                "title":"Ms",
+                "first":"Rose",
+                "last":"Arnold"
+                },
+            "location": {
+                "street": {
+                    "number": 5976,
+                    "name":"Queens Road"
+                },
+            "city":"Nottingham",
+            "state":"Hampshire",
+            "country":"United Kingdom",
+            "postcode":"MX9 6FX",
+            "coordinates": {
+                "latitude":"-8.4876",
+                "longitude":"164.8164"
+            },
+            "timezone": {
+                "offset":"+5:45",
+                "description":"Kathmandu"
+                }
+            },
+            "email":"rose.arnold@example.com",
+            "login":{
+                "uuid":"c0bc9a97-3a09-4e0f-b563-425e47662fc6",
+                "username":"brownfish221",
+                "password":"hawaiian",
+                "salt":"OcK4a0Tv",
+                "md5":"a4bb8acb62df882ffd3d9b06cafedeec",
+                "sha1":"bc11e17b4ef1348c7ede43418a8eb10aa1d679e2",
+                "sha256":"0637869f3873ed8477d68de7ff36f7781eaf038a20bc3199b796b7cc90651fcd"
+            },
+            "dob":{
+                "date":"1965-05-03T14:10:02.062Z",
+                "age":58
+            },
+            "registered":{
+                "date":"2020-05-16T20:17:55.721Z",
+                "age":3
+            },
+            "phone":"015395 04671",
+            "cell":"07080 241842",
+            "id":{
+                "name":"NINO",
+                "value":"XJ 72 94 86 Q"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/28.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/28.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/28.jpg"
+            },
+            "nat":"GB"
+            }
+        ],
+        "info":{
+            "seed":"eb462cd4d9c08636",
+            "results":1,
+            "page":1,
+            "version":"1.4"
+        },
+        "isDone": true
+}
