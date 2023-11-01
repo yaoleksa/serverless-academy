@@ -1,0 +1,2 @@
+To run server you can use following command: `env $(cat *.env | xargs) node server.js` (Linux only)
+To run sorting script itself you can run `env $(cat *.env | xargs) node json-sorting.js` command (Linux only)
