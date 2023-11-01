@@ -16,6 +16,7 @@ async function makeCall(url, tryNumber) {
     try {
         http.get(url, res => {
             const data = [];
+            let result;
             if(res.statusCode == 200) {
                 res.on('data', chunk => {
                     data.push(chunk);
@@ -23,11 +24,16 @@ async function makeCall(url, tryNumber) {
                 res.on('end', () => {
                     if(JSON.parse(Buffer.concat(data).toString()).isDone) {
                         success++;
+                        console.log(`[Success] ${url}: isDone - True`);
+                    } else {
+                        console.log(`[Success] ${url}: isDone - False`);
                     }
                     if(url.includes('20')) {
                         console.log(`Found True values: ${success}\nFound False values: ${20 - success}`);
                     }
                 });
+            } else {
+                console.log(`[Fail] ${url}: The endpoint is unavailable`);
             }
         });
     } catch(exception) {
