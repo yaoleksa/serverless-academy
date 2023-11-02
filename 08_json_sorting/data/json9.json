@@ -8,8 +8,8 @@
             "longitude": "-80.183", 
             "state": "Florida", 
             "state abbreviation": "FL", 
-            "latitude": "25.9286"
+            "latitude": "25.9286",
+            "isDone": true
         }
-    ],
-    "isDone": true
+    ]
 }

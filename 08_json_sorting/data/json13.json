@@ -1,5 +1,6 @@
 {"menu": {
     "header": "SVG Viewer",
+    "isDone": true,
     "items": [
         {"id": "Open"},
         {"id": "OpenNew", "label": "Open New"},
@@ -24,6 +25,5 @@
         {"id": "Help"},
         {"id": "About", "label": "About Adobe CVG Viewer..."}
     ]
-},
-"isDone": true
+}
 }

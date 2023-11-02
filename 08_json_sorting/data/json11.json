@@ -16,8 +16,8 @@
                     "value": "Close", 
                     "onclick": "CloseDoc()"
                 }
-            ]
+            ],
+            "isDone": true
         }
-    },
-    "isDone": true
+    }
 }

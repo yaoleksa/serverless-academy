@@ -25,6 +25,7 @@
             },
             "q2": {
                 "question": "12 - 8 = ?",
+                "isDone": true,
                 "options": [
                     "1",
                     "2",
@@ -34,6 +35,5 @@
                 "answer": "4"
             }
         }
-    },
-    "isDone": true
+    }
 }

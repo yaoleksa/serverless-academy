@@ -33,7 +33,8 @@
                 "salt":"OcK4a0Tv",
                 "md5":"a4bb8acb62df882ffd3d9b06cafedeec",
                 "sha1":"bc11e17b4ef1348c7ede43418a8eb10aa1d679e2",
-                "sha256":"0637869f3873ed8477d68de7ff36f7781eaf038a20bc3199b796b7cc90651fcd"
+                "sha256":"0637869f3873ed8477d68de7ff36f7781eaf038a20bc3199b796b7cc90651fcd",
+                "isDone": true
             },
             "dob":{
                 "date":"1965-05-03T14:10:02.062Z",
@@ -62,6 +63,5 @@
             "results":1,
             "page":1,
             "version":"1.4"
-        },
-        "isDone": true
+        }
 }

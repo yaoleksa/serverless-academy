@@ -22,7 +22,7 @@ async function makeCall(url, tryNumber) {
                     data.push(chunk);
                 });
                 res.on('end', () => {
-                    if(JSON.parse(Buffer.concat(data).toString()).isDone) {
+                    if(findByKey(JSON.parse(Buffer.concat(data).toString()), "isDone")) {
                         success++;
                         console.log(`[Success] ${url}: isDone - True`);
                         counter++;
@@ -42,5 +42,16 @@ async function makeCall(url, tryNumber) {
     } catch(exception) {
         tryNumber++;
         makeCall(url, tryNumber);
+    }
+}
+
+function findByKey(obj, key) {
+    for(let i in obj) {
+        if(i == key) {
+            return obj[key];
+        }
+        if(typeof obj[i] == 'object' && findByKey(obj[i], key)) {
+            return findByKey(obj[i], key);
+        }
     }
 }

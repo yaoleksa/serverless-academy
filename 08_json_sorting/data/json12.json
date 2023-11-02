@@ -1,6 +1,7 @@
 {
     "widget": {
         "debug": "on",
+        "isDone": true,
         "window": {
             "title": "Sample Konfabulator Widget",
             "name": "main_window",
@@ -24,6 +25,5 @@
             "alignment": "center",
             "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
         }
-    },
-    "isDone": true
+    }
 }    
